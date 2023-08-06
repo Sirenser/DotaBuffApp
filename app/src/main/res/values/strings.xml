@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ScreenApp</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="splash_text">Splash Screen</string>
+    <string name="login_fragment">DOTABUFF</string>
+    <string name="login_hint">Account ID or Profile name</string>
+    <string name="login_button_text">Search</string>
+    <string name="buffered_accountName">Мне нужна победа</string>
+    <string name="account_id_example">202230608</string>
+    <string name="account_name_example">Мне нужна победа</string>
+    <string name="recent_matches_text">Recent matches</string>
+
+</resources>
