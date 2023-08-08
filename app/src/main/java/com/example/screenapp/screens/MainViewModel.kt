@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.screenapp.models.HeroResponse
 import com.example.screenapp.repositories.*
 import com.example.screenapp.util.ApiState
-import com.example.screenapp.util.HeroesList
+import com.example.screenapp.util.HeroesData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -15,7 +15,8 @@ import javax.inject.Inject
 class MainViewModel(
     private val accountRepo: AccountResponseRepository,
     private val recentMatchRepo: RecentMatchesRepository,
-    private val heroesRepo: HeroResponseRepository
+    private val heroesRepo: HeroResponseRepository,
+    private val heroesData: HeroesData
 ) : ViewModel() {
 
     private val _accountBaseInfoStateFlow: MutableStateFlow<ApiState> =
@@ -55,7 +56,6 @@ class MainViewModel(
                 }.catch {
                     _recentMatchesStateFlow.value = ApiState.Failure("Error")
                 }.collectLatest {
-                    //       println("Data flowed in viewModel: $it")
                     _recentMatchesStateFlow.value = it
                 }
         }
@@ -71,9 +71,8 @@ class MainViewModel(
                 }.collectLatest {
                     val state = it as ApiState.Success<*>
                     val list = state.data as List<HeroResponse>
-                  //  println("Flowed Success in ViewModel")
                     _heroesListStateFlow.value = it
-                    HeroesList.updateList(list)
+                    heroesData.updateList(list)
                 }
 
         }
@@ -88,12 +87,13 @@ class MainViewModel(
 class MainViewModelFactory @Inject constructor(
     private val accountRepo: AccountResponseRepositoryImpl,
     private val recentMatchRepo: RecentMatchesRepositoryImpl,
-    private val heroesRepo: HeroResponseRepositoryImpl
+    private val heroesRepo: HeroResponseRepositoryImpl,
+    private val heroesData: HeroesData
 ) : ViewModelProvider.Factory {
 
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MainViewModel(accountRepo, recentMatchRepo, heroesRepo) as T
+        return MainViewModel(accountRepo, recentMatchRepo, heroesRepo, heroesData) as T
     }
 
 }

@@ -1,7 +1,6 @@
 package com.example.screenapp.repositories
 
 import com.example.screenapp.api.DotaApi
-import com.example.screenapp.models.AccountBaseInfoResponse
 import com.example.screenapp.models.RecentMatchesResponse
 import com.example.screenapp.util.ApiState
 import kotlinx.coroutines.flow.Flow

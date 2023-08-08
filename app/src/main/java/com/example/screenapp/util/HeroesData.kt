@@ -2,10 +2,8 @@ package com.example.screenapp.util
 
 import com.example.screenapp.models.HeroResponse
 
-// Этот обьект нужен для того чтобы хранить общую инфу о героях
-// и чтобы была возможность тянуть эту инфу из всех классов, так как это общая и статичная инфа
 
-object HeroesList {
+class HeroesData {
 
     private val heroesInfoList = ArrayList<HeroResponse>()
 

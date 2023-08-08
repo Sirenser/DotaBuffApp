@@ -19,11 +19,10 @@ import com.example.screenapp.adapter.RecentMatchesAdapter
 import com.example.screenapp.databinding.FragmentMainBinding
 import com.example.screenapp.di.getAppComponent
 import com.example.screenapp.models.AccountBaseInfoResponse
-import com.example.screenapp.models.HeroResponse
 import com.example.screenapp.models.RecentMatchesResponse
 import com.example.screenapp.util.ApiState
 import com.example.screenapp.util.Constants
-import com.example.screenapp.util.HeroesList
+import com.example.screenapp.util.HeroesData
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
@@ -34,6 +33,9 @@ class MainFragment : Fragment() {
 
     @Inject
     lateinit var mainViewModelFactory: MainViewModelFactory
+
+    @Inject
+    lateinit var heroesData: HeroesData
 
     private lateinit var viewModel: MainViewModel
 
@@ -59,7 +61,6 @@ class MainFragment : Fragment() {
         getAppComponent().inject(this)
         init()
 
-        adapter = RecentMatchesAdapter()
         binding.rvRecentMatches.layoutManager = LinearLayoutManager(requireContext())
         binding.rvRecentMatches.adapter = adapter
 
@@ -127,7 +128,7 @@ class MainFragment : Fragment() {
     private fun init() {
         accountId = requireArguments().getLong(DOTA_USER_ID)
         viewModel = ViewModelProvider(this, mainViewModelFactory)[MainViewModel::class.java]
-        adapter = RecentMatchesAdapter()
+        adapter = RecentMatchesAdapter(heroesData)
         pref =
             requireActivity().getSharedPreferences(Constants.APP_PREFERENCE, Context.MODE_PRIVATE)
                 .edit()
@@ -139,7 +140,7 @@ class MainFragment : Fragment() {
         if (viewModel.recentMatchesStateFlow !is ApiState.Success<*>) {
             viewModel.getRecentMatchesById(accountId)
         }
-        if (HeroesList.checkForEmpty()) {
+        if (heroesData.checkForEmpty()) {
             viewModel.loadHeroes()
         }
     }

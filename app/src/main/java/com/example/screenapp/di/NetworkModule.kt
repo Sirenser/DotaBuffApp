@@ -2,6 +2,7 @@ package com.example.screenapp.di
 
 import com.example.screenapp.api.DotaApi
 import com.example.screenapp.util.Constants
+import com.example.screenapp.util.HeroesData
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -42,6 +43,12 @@ class NetworkModule {
     @Provides
     fun provideApi(retrofit: Retrofit): DotaApi {
         return retrofit.create(DotaApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideHeroData(): HeroesData {
+        return HeroesData()
     }
 
 

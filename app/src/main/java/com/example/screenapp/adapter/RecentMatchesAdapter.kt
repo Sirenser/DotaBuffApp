@@ -5,17 +5,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.screenapp.R
 import com.example.screenapp.databinding.ItemMatchBinding
 import com.example.screenapp.models.RecentMatchesResponse
 import com.example.screenapp.util.Constants
-import com.example.screenapp.util.HeroesList
+import com.example.screenapp.util.HeroesData
 
-class RecentMatchesAdapter : RecyclerView.Adapter<RecentMatchesAdapter.ViewHolder>() {
+
+class RecentMatchesAdapter (var heroesData: HeroesData) : RecyclerView.Adapter<RecentMatchesAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemMatchBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val recentMatchesList = ArrayList<RecentMatchesResponse>()
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -33,7 +35,7 @@ class RecentMatchesAdapter : RecyclerView.Adapter<RecentMatchesAdapter.ViewHolde
 
         val kdaString = "${recentMatch.kills}/${recentMatch.deaths}/${recentMatch.assists}"
 
-        val heroInfo = HeroesList.getHeroById(recentMatch.hero_id)
+        val heroInfo = heroesData.getHeroById(recentMatch.hero_id)
 
         with(holder.binding) {
             tvKda.text = kdaString
