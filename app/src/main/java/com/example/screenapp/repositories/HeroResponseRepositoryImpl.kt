@@ -9,10 +9,8 @@ import javax.inject.Inject
 
 class HeroResponseRepositoryImpl @Inject constructor(val api: DotaApi) : HeroResponseRepository {
 
-
     override suspend fun getHeroes(): Flow<ApiState> {
         val response = api.getHeroes()
-
 
         return if (response.isSuccessful) {
             val data = response.body() as List<HeroResponse>
@@ -25,9 +23,5 @@ class HeroResponseRepositoryImpl @Inject constructor(val api: DotaApi) : HeroRes
                 emit(ApiState.Failure(response.errorBody().toString()))
             }
         }
-
-
     }
-
-
 }

@@ -24,5 +24,4 @@ interface DotaApi {
     @GET("api/heroStats")
     suspend fun getHeroes(): Response<List<HeroResponse>>
 
-
 }

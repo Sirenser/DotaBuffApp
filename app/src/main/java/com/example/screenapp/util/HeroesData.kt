@@ -9,7 +9,7 @@ class HeroesData {
 
     fun getHeroById(heroId: Int): HeroResponse {
         heroesInfoList.forEach {
-            if (it.hero_id == heroId)
+            if (it.heroId == heroId)
                 return it
         }
         return heroesInfoList[0]
@@ -20,10 +20,7 @@ class HeroesData {
         heroesInfoList.addAll(list)
     }
 
-    fun checkForEmpty(): Boolean {
-        println(heroesInfoList.isEmpty())
+    fun isEmpty(): Boolean {
         return heroesInfoList.isEmpty()
     }
-
-
 }

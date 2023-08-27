@@ -42,7 +42,6 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -61,11 +60,9 @@ class LoginFragment : Fragment() {
             )
         }
 
-
         with(binding) {
             rvAccountsSearch.adapter = adapter
             rvAccountsSearch.layoutManager = LinearLayoutManager(context)
-
 
             loginButton.setOnClickListener {
                 if (etLogin.text.isNullOrEmpty()) {
@@ -74,7 +71,6 @@ class LoginFragment : Fragment() {
                     viewModel.getAccountSearchResponse(etLogin.text.toString())
                 }
             }
-
 
             lifecycleScope.launch {
                 viewModel.accountInfoStateFlow.collectLatest {
@@ -103,12 +99,7 @@ class LoginFragment : Fragment() {
                         }
                     }
                 }
-
             }
-
-
         }
-
-
     }
 }

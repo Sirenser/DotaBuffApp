@@ -50,6 +50,4 @@ class NetworkModule {
     fun provideHeroData(): HeroesData {
         return HeroesData()
     }
-
-
 }

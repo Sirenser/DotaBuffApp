@@ -32,9 +32,6 @@ class MainViewModel(
     private val _heroesListStateFlow: MutableStateFlow<ApiState> =
         MutableStateFlow(ApiState.Empty)
 
-    val heroesStateFlow: StateFlow<ApiState> = _heroesListStateFlow
-
-
     fun getAccountBaseInfo(accountId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             accountRepo.fetchAccountById(accountId = accountId.toString())
@@ -74,13 +71,8 @@ class MainViewModel(
                     _heroesListStateFlow.value = it
                     heroesData.updateList(list)
                 }
-
         }
-
-
     }
-
-
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -90,10 +82,7 @@ class MainViewModelFactory @Inject constructor(
     private val heroesRepo: HeroResponseRepositoryImpl,
     private val heroesData: HeroesData
 ) : ViewModelProvider.Factory {
-
-
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return MainViewModel(accountRepo, recentMatchRepo, heroesRepo, heroesData) as T
     }
-
 }

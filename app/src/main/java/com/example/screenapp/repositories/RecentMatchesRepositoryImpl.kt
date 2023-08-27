@@ -10,7 +10,6 @@ import javax.inject.Inject
 class RecentMatchesRepositoryImpl @Inject constructor(private val api: DotaApi) :
     RecentMatchesRepository {
 
-
     override suspend fun fetchRecentMatches(accountId: String): Flow<ApiState> {
         val response = api.getRecentMatches(accountId = accountId)
 
@@ -27,5 +26,4 @@ class RecentMatchesRepositoryImpl @Inject constructor(private val api: DotaApi) 
             }
         }
     }
-
 }

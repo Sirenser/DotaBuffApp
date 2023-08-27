@@ -45,7 +45,6 @@ class MainFragment : Fragment() {
 
     private var accountId: Long = 0
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,7 +53,6 @@ class MainFragment : Fragment() {
 
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,48 +64,26 @@ class MainFragment : Fragment() {
 
         lifecycleScope.launchWhenCreated {
             viewModel.accountBaseInfoStateFlow.collectLatest {
-                when (it) {
-                    is ApiState.Loading -> {
-
-                    }
-                    is ApiState.Empty -> {
-
-                    }
-                    is ApiState.Failure -> {
-
-                    }
-                    is ApiState.Success<*> -> {
-                        val accountInfo = it.data as AccountBaseInfoResponse
-                        binding.accountName.text = accountInfo.profile!!.personaname
-                        Glide.with(requireContext())
-                            .load(accountInfo.profile.avatarmedium)
-                            .into(binding.accountAvatar)
-                    }
+                if (it is ApiState.Success<*>) {
+                    val accountInfo = it.data as AccountBaseInfoResponse
+                    binding.accountName.text = accountInfo.profile!!.personaName
+                    Glide.with(requireContext())
+                        .load(accountInfo.profile.avatarMedium)
+                        .into(binding.accountAvatar)
                 }
             }
         }
+
 
         lifecycleScope.launchWhenCreated {
             viewModel.recentMatchesStateFlow.collectLatest {
-                when (it) {
-                    is ApiState.Loading -> {
-
-                    }
-                    is ApiState.Empty -> {
-
-
-                    }
-                    is ApiState.Failure -> {
-
-                    }
-                    is ApiState.Success<*> -> {
-                        val recentMatchesList = it.data as List<RecentMatchesResponse>
-                        //  println("Data flowed in screen : ${recentMatchesList[0]}")
-                        adapter.updateRecentMatchesList(recentMatchesList)
-                    }
+                if (it is ApiState.Success<*>) {
+                    val recentMatchesList = it.data as List<RecentMatchesResponse>
+                    adapter.updateRecentMatchesList(recentMatchesList)
                 }
             }
         }
+
 
         binding.imageButton.setOnClickListener {
 
@@ -120,9 +96,7 @@ class MainFragment : Fragment() {
                         inclusive = true
                     }
                 })
-
         }
-
     }
 
     private fun init() {
@@ -140,9 +114,9 @@ class MainFragment : Fragment() {
         if (viewModel.recentMatchesStateFlow !is ApiState.Success<*>) {
             viewModel.getRecentMatchesById(accountId)
         }
-        if (heroesData.checkForEmpty()) {
-            viewModel.loadHeroes()
-        }
+        //  if (heroesData.isEmpty()) {
+        //      viewModel.loadHeroes()
+        //  }
     }
 
 

@@ -20,7 +20,6 @@ class LoginViewModel(private val repo: AccountResponseRepository) : ViewModel() 
 
     val accountInfoStateFlow: StateFlow<ApiState> = _accountInfoStateFlow
 
-
     fun getAccountSearchResponse(accountInfo: String) {
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -33,12 +32,8 @@ class LoginViewModel(private val repo: AccountResponseRepository) : ViewModel() 
                 }.collectLatest {
                     _accountInfoStateFlow.value = it
                 }
-
         }
-
     }
-
-
 }
 
 @Suppress("UNCHECKED_CAST")

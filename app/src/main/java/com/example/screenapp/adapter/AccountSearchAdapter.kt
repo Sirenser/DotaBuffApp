@@ -16,7 +16,6 @@ class AccountSearchAdapter(private val listener: OnItemAccClicked) :
 
     private val accountSearchList = ArrayList<AccountSearchResponse>()
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountViewHolder {
 
         val inflater = LayoutInflater.from(parent.context)
@@ -28,16 +27,15 @@ class AccountSearchAdapter(private val listener: OnItemAccClicked) :
     override fun onBindViewHolder(holder: AccountViewHolder, position: Int) {
 
         with(holder.binding) {
-            tvAccountName.text = accountSearchList[position].personaname
+            tvAccountName.text = accountSearchList[position].personaName
             tvAccountId.text = accountSearchList[position].account_id.toString()
             Glide.with(holder.binding.root)
-                .load(accountSearchList[position].avatarfull)
+                .load(accountSearchList[position].avatarFull)
                 .into(ivAccountAvatar)
         }
         holder.itemView.setOnClickListener {
             listener.onClicked(accountId = accountSearchList[position].account_id.toLong())
         }
-
     }
 
     override fun getItemCount(): Int = accountSearchList.size
@@ -48,8 +46,6 @@ class AccountSearchAdapter(private val listener: OnItemAccClicked) :
         accountSearchList.addAll(list)
         notifyDataSetChanged()
     }
-
-
 }
 
 fun interface OnItemAccClicked {

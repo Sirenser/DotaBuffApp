@@ -12,10 +12,8 @@ import javax.inject.Inject
 class AccountResponseRepositoryImpl @Inject constructor(private val api: DotaApi) :
     AccountResponseRepository {
 
-
     override suspend fun fetchAccountById(accountId: String): Flow<ApiState> {
         val response = api.getUser(accountId = accountId)
-
 
         return if (response.isSuccessful) {
             val data = response.body() as AccountBaseInfoResponse
@@ -43,6 +41,4 @@ class AccountResponseRepositoryImpl @Inject constructor(private val api: DotaApi
             }
         }
     }
-
-
 }

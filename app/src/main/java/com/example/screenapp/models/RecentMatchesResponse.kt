@@ -1,30 +1,58 @@
 package com.example.screenapp.models
 
+import com.google.gson.annotations.SerializedName
+
 data class RecentMatchesResponse(
+    @SerializedName("assists")
     val assists: Int,
-    val average_rank: Int,
+    @SerializedName("average_rank")
+    val averageRank: Int,
+    @SerializedName("cluster")
     val cluster: Int,
+    @SerializedName("deaths")
     val deaths: Int,
+    @SerializedName("duration")
     val duration: Int,
-    val game_mode: Int,
-    val gold_per_min: Int,
-    val hero_damage: Int,
-    val hero_healing: Int,
-    val hero_id: Int,
-    val is_roaming: Any,
+    @SerializedName("game_mode")
+    val gameMode: Int,
+    @SerializedName("gold_per_min")
+    val goldPerMin: Int,
+    @SerializedName("hero_damage")
+    val heroDamage: Int,
+    @SerializedName("hero_healing")
+    val heroHealing: Int,
+    @SerializedName("hero_id")
+    val heroId: Int,
+    @SerializedName("is_roaming")
+    val isRoaming: Any,
+    @SerializedName("kills")
     val kills: Int,
+    @SerializedName("lane")
     val lane: Any,
-    val lane_role: Any,
-    val last_hits: Int,
-    val leaver_status: Int,
-    val lobby_type: Int,
-    val match_id: Long,
-    val party_size: Int,
-    val player_slot: Int,
-    val radiant_win: Boolean,
+    @SerializedName("lane_role")
+    val laneRole: Any,
+    @SerializedName("last_hits")
+    val lastHits: Int,
+    @SerializedName("leaver_status")
+    val leaverStatus: Int,
+    @SerializedName("lobby_type")
+    val lobbyType: Int,
+    @SerializedName("match_id")
+    val matchId: Long,
+    @SerializedName("party_size")
+    val partySize: Int,
+    @SerializedName("player_slot")
+    val playerSlot: Int,
+    @SerializedName("radiant_win")
+    val radiantWin: Boolean,
+    @SerializedName("skill")
     val skill: Any,
-    val start_time: Int,
-    val tower_damage: Int,
+    @SerializedName("start_time")
+    val startTime: Int,
+    @SerializedName("tower_damage")
+    val towerDamage: Int,
+    @SerializedName("version")
     val version: Any,
-    val xp_per_min: Int
+    @SerializedName("xp_per_min")
+    val xpPerMin: Int
 )

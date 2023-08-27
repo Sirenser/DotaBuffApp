@@ -1,13 +1,20 @@
 package com.example.screenapp.models
 
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 
 data class AccountBaseInfoResponse(
-    val competitive_rank: Int,
-    val leaderboard_rank: Int,
-    val mmr_estimate: MmrEstimate,
+    @SerializedName("competitive_rank")
+    val competitiveRank: Int,
+    @SerializedName("leaderboard_rank")
+    val leaderboardRank: Int,
+    @SerializedName("mmr_estimate")
+    val mmrEstimate: MmrEstimate,
+    @SerializedName("profile")
     val profile: Profile?,
-    val rank_tier: Int,
-    val solo_competitive_rank: Int
+    @SerializedName("rank_tier")
+    val rankTier: Int,
+    @SerializedName("solo_competitive_rank")
+    val soloCompetitiveRank: Int
 ) : Serializable

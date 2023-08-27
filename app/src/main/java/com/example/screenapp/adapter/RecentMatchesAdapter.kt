@@ -17,8 +17,6 @@ class RecentMatchesAdapter (var heroesData: HeroesData) : RecyclerView.Adapter<R
 
     private val recentMatchesList = ArrayList<RecentMatchesResponse>()
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         val inflater = LayoutInflater.from(parent.context)
@@ -35,31 +33,28 @@ class RecentMatchesAdapter (var heroesData: HeroesData) : RecyclerView.Adapter<R
 
         val kdaString = "${recentMatch.kills}/${recentMatch.deaths}/${recentMatch.assists}"
 
-        val heroInfo = heroesData.getHeroById(recentMatch.hero_id)
+        val heroInfo = heroesData.getHeroById(recentMatch.heroId)
 
         with(holder.binding) {
             tvKda.text = kdaString
-            tvHeroName.text = heroInfo.localized_name
-            if (recentMatch.player_slot <= 5) {
-                if (recentMatch.radiant_win) {
+            tvHeroName.text = heroInfo.localizedName
+            if (recentMatch.playerSlot <= 5) {
+                if (recentMatch.radiantWin) {
                     tvWinOrLose.text = "Win"
                 } else {
                     tvWinOrLose.text = "Lose"
                 }
             } else {
-                if (!recentMatch.radiant_win) {
+                if (!recentMatch.radiantWin) {
                     tvWinOrLose.text = "Win"
                 } else {
                     tvWinOrLose.text = "Lose"
                 }
             }
-
             Glide.with(root)
                 .load("${Constants.DOTA_API_BASE_URL}${heroInfo.img}")
                 .into(ivHeroAvatar)
-
         }
-
     }
 
     override fun getItemCount(): Int = recentMatchesList.size

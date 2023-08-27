@@ -1,20 +1,35 @@
 package com.example.screenapp.models
 
+import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class Profile(
-    val account_id: Int,
+    @SerializedName("account_id")
+    val accountId: Int,
+    @SerializedName("avatar")
     val avatar: String,
-    val avatarfull: String,
-    val avatarmedium: String,
+    @SerializedName("avatarfull")
+    val avatarFull: String,
+    @SerializedName("avatarmedium")
+    val avatarMedium: String,
+    @SerializedName("cheese")
     val cheese: Int,
-    val is_contributor: Boolean,
-    val is_subscriber: Boolean,
-    val last_login: String,
-    val loccountrycode: String,
+    @SerializedName("is_contributor")
+    val isContributor: Boolean,
+    @SerializedName("is_subscriber")
+    val isSubscriber: Boolean,
+    @SerializedName("last_login")
+    val lastLogin: String,
+    @SerializedName("loccountrycode")
+    val locCountryCode: String,
+    @SerializedName("name")
     val name: String,
-    val personaname: String,
+    @SerializedName("personaname")
+    val personaName: String,
+    @SerializedName("plus")
     val plus: Boolean,
-    val profileurl: String,
-    val steamid: String
+    @SerializedName("profileurl")
+    val profileURL: String,
+    @SerializedName("steamid")
+    val steamId: String
 ) : Serializable
